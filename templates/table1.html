@@ -1,0 +1,25 @@
+<!-- Jinga2 template to display a list of lists/tuples, such as a database query 
+     This will handle tables of any number of rows and columns -->
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Roseburn Tree Data</title>
+</head>
+
+<body>
+
+    <h2>{{ title }}</h2>
+
+         <table>
+            {% for row in table %}
+            <tr>
+            {% for col in row %}
+            <td>{{ col }}</td>
+            {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>   
+</body>
+     
