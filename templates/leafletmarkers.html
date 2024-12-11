@@ -41,10 +41,8 @@
             })
         .catch(err => console.error(err));
 
-        //this two lines////////////////////
         var geojsonData = {{ geojson_data|safe }};
         L.geoJSON(geojsonData).addTo(map);
-        ///////////////////////////////
     </script>
 </body>
 </html>
