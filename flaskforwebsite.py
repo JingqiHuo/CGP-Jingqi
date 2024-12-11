@@ -5,8 +5,9 @@
     See https://flask.palletsprojects.com/en/stable/quickstart/
 """
 
-from flask import Flask, render_template, jsonify
+from flask import Flask
 import json
+from flask import render_template
 import oracledb
 from pathlib import Path
 import os
@@ -18,7 +19,7 @@ import cgitb
 
 app = Flask(__name__)
 
-def get_password(passfile='RPPP/Greenspace-R/Captial-Greenspaces-Project-Group-3-main/database_password'):
+def get_password(passfile='/home/s2630332/RPPP/Greenspace-R/Captial-Greenspaces-Project-Group-3-main/database_password'):
     """Reads a password from a file in stored in the home directory of the user.
     Args:
         passfile (str, optional): A filename containing the password in the users home directory
@@ -39,7 +40,9 @@ def get_password(passfile='RPPP/Greenspace-R/Captial-Greenspaces-Project-Group-3
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    message = """Hello world. This is a flask app. 
+            Explore the other pages by appending the various @app.route arguments to this URL."""
+    return message
 
 @app.route('/trees') 
 def retreive():
@@ -77,19 +80,10 @@ def map():
             c.execute("select * from s2750126.trees")     #sql query
             data = c.fetchall()
             print(data)
-
-    #this two lines################
-    with open('/home/s2630332/RPPP/Greenspace-R/Captial-Greenspaces-Project-Group-3-main/static/boundary.json') as f:
-        geojson_data = json.load(f)    
-    #########################
-
-    #geojson_data=json.dumps(geojson_data)###########
-    return render_template('leafletmarkers.html',markers=data,geojson_data=json.dumps(geojson_data))
-###################
-
-
-
-
+    with open('/home/s2630332/RPPP/Greenspace-R/Captial-Greenspaces-Project-Group-3-main/static/boundary.json') as file:
+        geojson_data = json.load(file)
+    #geojson_data=json.dumps(geojson_data)
+    return render_template('leafletmarkers_copy.html',markers=data,geojson_data=json.dumps(geojson_data))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=55401 , debug=True)
