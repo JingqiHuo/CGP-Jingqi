@@ -49,7 +49,7 @@ html, body, #map {
         .toggle-button {
             position: absolute;
             top: 50%;
-            left: 340px; /* Align with panel width */
+            left: 70px; /* Align with panel width */
             transform: translateY(-50%);
             z-index: 1001;
             cursor: pointer;
@@ -61,7 +61,7 @@ html, body, #map {
         }
 
         .side-panel.open + .toggle-button {
-            left: 250px; /* Stay aligned with panel when open */
+            left: 350px; /* Stay aligned with panel when open */
         }
 
         .side-panel a {
@@ -83,4 +83,24 @@ html, body, #map {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
+        }
+        .tree-info {
+            margin-top: 10px;
+        }
+
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
