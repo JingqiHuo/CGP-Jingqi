@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Roseburn Cycle Path</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='leafletmarkers_copy.css') }}" />
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+         crossorigin=""></script>
+</head>
+
+<body>
+<div id="map"></div>
+<div class="control-panel">
+<label class="maple">
+    <input type="checkbox" id="mapleCheckbox" checked>
+    <span>Maple Sycamore</span>
+</label>
+<label>
+    <input type="checkbox" id="elmCheckbox" checked> 
+    <span>Elm</span>
+</label>
+<label>
+    <input type="checkbox" id="hawthornCheckbox" checked> 
+    <span>Hawthorn</span>
+</label>
+<label>
+    <input type="checkbox" id="beechCheckbox" checked> 
+    <span>Beech</span>
+</label>
+<label>
+    <input type="checkbox" id="birchCheckbox" checked> 
+    <span>Birch</span>
+</label>
+<label>
+    <input type="checkbox" id="yewCheckbox" checked> 
+    <span>Common Yew</span>
+</label>
+<label>
+    <input type="checkbox" id="willowCheckbox" checked> 
+    <span>Willow</span>
+</label>
+<label>
+    <input type="checkbox" id="prunusCheckbox" checked> 
+    <span>Prunus</span>
+</label>
+<label>
+    <input type="checkbox" id="oakCheckbox" checked> 
+    <span>Oak</span>
+</label>
+<label>
+    <input type="checkbox" id="ashCheckbox" checked> 
+    <span>Ash</span>
+</label>
+    <!-- Add more checkboxes as needed -->
+</div>
+<!--side panel and info-->
+<div class="side-panel" id="sidePanel">
+    <div class="panel-header">Tree Information</div>
+    <div id="treeInfo" class="tree-info">Select a tree marker to view details.</div>
+</div>
+
+<!--panel toggle button-->
+<div class="toggle-button" id="toggleButton">i</div>    
+
+<!--divsion for map content-->
+<div class="content"></div>
+
+<!--uses static file called leafletmarkers.js.-->
+    <script src="{{ url_for('static', filename='leafletmarkers.js') }}" ></script>
+
+<!--select elements (sidePanel, toggleButton and treeInfo)-->
+    <script>
+        var sidePanel = document.getElementById('sidePanel');
+        var toggleButton = document.getElementById('toggleButton');
+        var treeInfo = document.getElementById('treeInfo');
+
+    //gets markers and catches error if unsuccessful
+    fetch('/markers')
+        .then(response => response.json())
+        .then(data => {
+            L.geoJSON(data).addTo(map);})
+    .catch(err => console.error(err));
+
+    //add studysite border line using geojson
+    var geojsonData = {{ geojson_data|safe }};
+    L.geoJSON(geojsonData,{
+        style: {
+            color: 'black',}    //Border line color
+    }).addTo(map);
+    </script>
+
+<!--colour of the markers and add to map-->
+    <script>        //tree colours
+        var treeColors = {'Maple Sycamore': 'white',
+        'Birch':'black',
+        'Common Yew' : 'yellow',
+        'Hawthorn' : 'pink',
+        'Willow' : 'purple',
+        'Beech' : 'orange',
+        'Prunus' : 'blue',
+        'Oak' : 'red',
+        'Ash' : 'navy',
+        'Elm' : 'lightblue'};
+
+        //dynamically creates map markers from database
+        var content;
+        var marker = {{ markers|safe }};
+        var mapleSycamoreLayer = L.layerGroup().addTo(map);
+        var elmLayer = L.layerGroup().addTo(map);
+        var hawthornLayer = L.layerGroup().addTo(map);
+        var beechLayer = L.layerGroup().addTo(map);
+        var birchLayer = L.layerGroup().addTo(map);
+        var commonyewLayer = L.layerGroup().addTo(map);
+        var willowLayer = L.layerGroup().addTo(map);
+        var prunusLayer = L.layerGroup().addTo(map);
+        var oakLayer = L.layerGroup().addTo(map);
+        var ashLayer = L.layerGroup().addTo(map);
+
+        markersinfo = [];
+            {% for marker in markers %}
+            
+            fetch('{{ url_for('static', filename='description.txt') }}')
+        .then(response => response.json())
+        .then(descriptions =>{
+        //creates customised circle markers - if not found defaults to black
+        var treeType = '{{marker[2]}}';
+        var photoid = '{{marker[0]}}';
+        var fillcolor = treeColors[treeType] || 'black';
+        var markerdata = L.circleMarker(
+            [{{ marker[3] }}, {{ marker[4] }}],
+            {radius: 8,     //size of circle
+            color: 'black', //border color
+            weight: 2,      //border size
+            fillColor: fillcolor,     //fill color
+            fillOpacity: 1})
+            .addTo(map).bindPopup("<p><b>Dry-Weight Biomass (kg) = </b>{{ marker[1] }}</p> <p><b>Species: </b>{{ marker[2] }}</p>");
+            
+            if (treeType === 'Maple Sycamore') {
+                markerdata.addTo(mapleSycamoreLayer);
+        } 
+        else if (treeType === 'Elm') {
+            markerdata.addTo(elmLayer);
+        }
+        else if (treeType === 'Hawthorn') {
+            markerdata.addTo(hawthornLayer);
+        }
+        else if (treeType === 'Beech') {
+            markerdata.addTo(beechLayer);
+        }
+        else if (treeType === 'Birch') {
+            markerdata.addTo(birchLayer);
+        }
+        else if (treeType === 'Common Yew') {
+            markerdata.addTo(commonyewLayer);
+        }
+        else if (treeType === 'Willow') {
+            markerdata.addTo(willowLayer);
+        }
+        else if (treeType === 'Prunus') {
+            markerdata.addTo(prunusLayer);
+        }
+        else if (treeType === 'Oak') {
+            markerdata.addTo(oakLayer);
+        }
+        else if (treeType === 'Ash') {
+            markerdata.addTo(ashLayer);
+        }
+    
+
+
+        //when marker is clicked, updates side panel with information
+            markerdata.on('click', function() {
+        var content = "<img src='static/Compressed_images/" + {{marker[0]}} + ".jpg'"+"<p><b>Dry-Weight Biomass (kg) = </b>{{ marker[1] }}</p> <p><b>Species: </b>{{ marker[2] }}</p>" + "<b>Interesting facts: </b>" + descriptions[treeType] || "No description available.";
+        treeInfo.innerHTML = content;
+        sidePanel.classList.add('open');});     // Show the side panel
+    }) 
+
+    
+        //creates a legend
+        var legend = L.control({ position: 'topright' });
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            for (var treeType in treeColors) {
+                if (treeColors.hasOwnProperty(treeType)) {
+                    div.innerHTML += '<i style="background:' + treeColors[treeType] + '"></i> ' +
+                            treeType + '<br>';}}
+            return div;
+        };          
+     
+        
+        {% endfor %}
+    
+        legend.addTo(map);
+
+        //switch the checkbox
+        document.getElementById('mapleCheckbox').addEventListener('change', function() {
+        toggleLayer(mapleSycamoreLayer, this.checked);
+    });
+        document.getElementById('elmCheckbox').addEventListener('change', function() {
+        toggleLayer(elmLayer, this.checked);
+    });
+    document.getElementById('hawthornCheckbox').addEventListener('change', function() {
+        toggleLayer(hawthornLayer, this.checked);
+    });
+    document.getElementById('beechCheckbox').addEventListener('change', function() {
+        toggleLayer(beechLayer, this.checked);
+    });
+    document.getElementById('birchCheckbox').addEventListener('change', function() {
+        toggleLayer(birchLayer, this.checked);
+    });
+    document.getElementById('yewCheckbox').addEventListener('change', function() {
+        toggleLayer(commonyewLayer, this.checked);
+    });
+    document.getElementById('willowCheckbox').addEventListener('change', function() {
+        toggleLayer(willowLayer, this.checked);
+    });
+    document.getElementById('prunusCheckbox').addEventListener('change', function() {
+        toggleLayer(prunusLayer, this.checked);
+    });
+    document.getElementById('oakCheckbox').addEventListener('change', function() {
+        toggleLayer(oakLayer, this.checked);
+    });
+    document.getElementById('ashCheckbox').addEventListener('change', function() {
+        toggleLayer(ashLayer, this.checked);
+    });
+
+    function toggleLayer(layer, visible) {
+        if (visible) {
+            map.addLayer(layer);
+        } else {
+            map.removeLayer(layer);
+        }
+    }
+        
+        //side panel toggle
+        var sidePanel = document.getElementById('sidePanel');
+        var toggleButton = document.getElementById('toggleButton');
+        toggleButton.onclick = function() {
+            sidePanel.classList.toggle('open');}       
+    </script>
+
+<script>
+    //<script>
+    //    {% for marker in markers %}
+    //        L.circleMarker([{{ marker[3]}}, {{ marker[4]}}],
+    //        {radius: 8,     //size of circle
+    //        color: 'black', //border color
+    //        weight: 2,      //border size
+    //        fillColor: 'white',     //fill color
+    //        fillOpacity: 1})        //color strength
+    //        .addTo(map)
+    //        .bindPopup("<p> Dry-Weight Biomass (kg) = {{ marker[1] }}</p> Species: {{marker[2]}}");
+    //    {% endfor %}
+    //</script>
+
+</body>
+</html>
