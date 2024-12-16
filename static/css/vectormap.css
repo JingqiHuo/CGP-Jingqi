@@ -1,0 +1,275 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #vector-map {
+    height: 100%;
+    width: 100vw;
+}
+#vector-map 
+         .legend { 
+            background:#a3b18a ;
+            border: 2px solid #e0b067 ;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 40px 60px;
+            font-family: 'Arial', sans-serif;
+            font-size: 18px;
+            
+            color:#344e41;
+            
+         }
+         .legend i {
+             width: 18px;
+             height: 18px;
+             float: left;
+             margin-right: 8px;
+             opacity: 0.7;
+             border: solid #333;
+         }
+
+
+         .side-panel {
+            width: 250px;
+            background-color:#a3b18a;
+            position: absolute;
+            top: 50%;
+            left: -280px; /* Hide panel off screen initially */
+            transform: translateY(-50%);
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            padding: 20px 50px;
+            transition: left 0.3s ease;
+            color:#344e41;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .side-panel.open {
+            left: 0; /* Show panel */
+        }
+
+        .toggle-button {
+            position: absolute;
+            top: 50%;
+            left: 70px; /* Align with panel width */
+            transform: translateY(-50%);
+            z-index: 1001;
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            padding: 2px 5px;
+            border-radius: 0 5px 5px 0;
+            transition: left 0.3s ease;
+        }
+
+        .side-panel.open + .toggle-button {
+            left: 350px; /* Stay aligned with panel when open */
+        }
+
+        .side-panel a {
+            color: #344e41;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .side-panel a:hover {
+            background-color: #e0e0e0;
+        }
+
+        .panel-header {
+            color: #344e41;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .tree-info {
+            margin-top: 10px;
+            color: #344e41;
+        }
+        .tree-info img {
+            width: 100%;
+            height: auto;
+            margin-top: 10px;
+            border: 2px solid #eea73e;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+/*tree checkbox customize*/
+        .tree-button {
+            margin: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        .control-panel {
+            position: absolute;
+            top: 10px;
+            right: -10%;
+            transform: translate(-50%, 0);
+            background-color: #a3b18a;
+            padding: 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: inline-block;
+            gap: 5px;
+            transition: transform 0.3s ease;
+            border: 2px solid #eea73e;
+            flex-direction: row;
+        }
+        .control-panel label {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: 5px;
+                    cursor: pointer;
+                    color:#344e41;
+                    font-weight: bold;
+                }
+            
+                .control-panel input {
+                    display: none;
+                }
+        
+        .color-block {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            border-radius: 5px;
+            border:3px solid #a8762b;
+            background-color: transparent;
+            transition: background-color 0.1;
+        }
+        /* Specific colors for each tree type when checked */
+        #mapleCheckbox:checked + .color-block {
+            background-color: white;
+            transition: background-color 0.1;
+        }
+        #elmCheckbox:checked + .color-block {
+            background-color: lightblue;
+            transition: background-color 0.1;
+        }
+        #hawthornCheckbox:checked + .color-block {
+            background-color: pink;
+            transition: background-color 0.1;
+        }
+        #beechCheckbox:checked + .color-block {
+            background-color: orange;
+            transition: background-color 0.1;
+        }
+        #birchCheckbox:checked + .color-block {
+            background-color: black;
+            transition: background-color 0.1;
+        }
+        #yewCheckbox:checked + .color-block {
+            background-color: yellow;
+            transition: background-color 0.1;
+        }
+        #willowCheckbox:checked + .color-block {
+            background-color: purple;
+            transition: background-color 0.1;
+        }
+        #prunusCheckbox:checked + .color-block {
+            background-color: blue;
+            transition: background-color 0.1;
+        }
+        #oakCheckbox:checked + .color-block {
+            background-color: red;
+            transition: background-color 0.1;
+        }
+        #ashCheckbox:checked + .color-block {
+            background-color: navy;
+            transition: background-color 0.1;
+        }
+
+        
+        /* .control-panel label span {
+            display: flex;
+            align-items: center;
+            background-color: #e7d77d;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            border: 2px solid  #976720;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+            color:#344e41;
+            
+        } */
+
+        
+        /* Style for unchecked hover */
+        /* .control-panel label:hover span {
+            background-color:  rgb(19, 114, 6);
+            color:#afc7bb;
+        } */
+        
+        
+        /* Style for hover */
+        label:hover .color-block  {
+            border:3px solid #c5954d;
+        }
+        /* Click effect to make the block smaller */
+        label:active .color-block {
+            transform: scale(0.9); /* Scale down on click */
+        }
+        /*
+        .control-panel label input {
+            display: none;
+        }
+
+        
+        .control-panel label input:checked  + span{
+            
+            display: flex;
+            align-items: center;
+            background-color: rgb(19, 114, 6);
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            border: 2px solid #976720;
+            transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+            color:#afc7bb
+        } */
+        
+         /* Add dual border effect */
+         .control-panel ::before ,.side-panel::before,.legend::before,.tree-info img::before{
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 2px solid #7e571d;
+            border-radius: 5px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .control-panel ::after,.side-panel::after,.legend::after,.tree-info img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid  #7e571d;
+            border-radius: 3px;
+            z-index: 1;
+            pointer-events: none;
+        }
