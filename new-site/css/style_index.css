@@ -8,7 +8,7 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-    background-color: #dad7cd; /* Light gray-green background */
+    background-color: #ffffff; /* Light gray-green background */
     color: #344e41; /* Darkest green text */
 }
 
@@ -48,6 +48,8 @@ header a {
     object-fit: cover;
 }
 .content2 {    
+    
+    margin-bottom: 20px; /* Space between containers */
     position: relative;
     background-color: #ffffff;    
     color: #84c451;  /* Text color */
@@ -57,6 +59,8 @@ header a {
     display: flex;
     align-items: flex-start;
 }
+
+
 .content1 img {   
     width: 100%;
     height: auto;
@@ -79,9 +83,25 @@ header a {
     text-align: left;
     max-height: fit-content;  
 }
-.content-text {
+.sec4-text-floating{
     
-    float: left;
+    color: #000000;  /* Text color */
+    padding: 10px;
+    max-width: 1200px;
+    text-align: left;
+    max-height: fit-content;  
+    position: relative; /* Position absolutely within the container */
+    transform: translateX(35%);
+}
+.sec6-text-floating{
+    
+    color: #000000;  /* Text color */
+    padding: 10px;
+    max-width: 1200px;
+    text-align: left;
+    max-height: fit-content;  
+    position: relative; /* Position absolutely within the container */
+    transform: translateX(25%);
 }
 
 footer {
@@ -135,6 +155,36 @@ button:hover {
     transform: translateX(50%); /* Center adjust */
     transform: translateY(0%);
     font-size: 4.5rem;
+}
+.sec4-title-floating{
+    position: absolute; /* Relative to itself but within the container */
+    object-fit: cover;
+    color: #000000;  /* Text color */
+    
+    left: 50%;
+    border-radius: 5px; /* Optional: Rounded corners */
+    text-align: center;
+    
+    transform: translateX(50%); /* Center adjust */
+    transform: translateY(0%);
+    font-size: 4.5rem;
+}
+.h2 {
+    
+    transform: translateY(40%) translateX(90%);
+    
+    font-size: 72px;
+   
+}
+.h3 {
+    
+    transform: translateY(40%) translateX(60%);
+    
+    font-size: 72px;
+   
+}
+strong{
+    color:#84c451; 
 }
 
 
