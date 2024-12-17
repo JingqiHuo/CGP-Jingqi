@@ -1,0 +1,174 @@
+ /*Main page style */
+ :root {
+    font-size: 16px; /* Sets the root font size，1rem = 16px */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #dad7cd; /* Light gray-green background */
+    color: #344e41; /* Darkest green text */
+}
+
+header {
+    background-color: #84c451;
+    color: #dad7cd;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.125rem solid #588157; /* frame */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+}
+
+header a {
+    text-decoration: none;
+    color: #a3b18a; /* Light green text */
+    
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* The content, map, and result parts are uniformly colored */
+.content1 {  
+    position: relative;
+    background-color: #84c451;    
+    color: #344e41; /* Text color */
+    font-size: 1.35rem;   
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: flex-start;
+}
+.cover img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+.content2 {    
+    position: relative;
+    background-color: #ffffff;    
+    color: #84c451;  /* Text color */
+    font-size: 1.35rem;   
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    align-items: flex-start;
+}
+.content1 img {   
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+		 /* fallback */
+}
+.content2 img {   
+    width: 100%;
+    height: auto;
+		 /* fallback */
+}
+
+.sec2-text-floating{
+    position: absolute; /* Position absolutely within the container */
+    top: 20%;
+    left: 35%;
+    color: #000000;  /* Text color */
+    padding: 10px;
+    max-width: 1200px;
+    text-align: left;
+    max-height: fit-content;  
+}
+.content-text {
+    
+    float: left;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #3a5a40; /* Dark green background */
+    color: #dad7cd; /* Light gray-green text */
+    border-top: 0.125rem solid #588157; /* Border color */
+    font-size: 1rem;
+}
+
+button {
+    padding: 0.625rem 1.25rem;
+    background-color: #588157; /* button color */
+    color: #dad7cd;
+    border: none;
+    border-radius: 0.3125rem;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #344e41;
+    transition: background-color 0.3s; /* button hover effect */
+}
+
+.sec1-title-floating{
+    position: absolute; /* Relative to itself but within the container */
+    object-fit: cover;
+    color: white; /* Text color */
+    top: 50%;
+    left: 50%;
+    border-radius: 5px; /* Optional: Rounded corners */
+    text-align: center;
+    text-shadow: 4px 4px 8px rgb(0, 0, 0);
+    transform: translateX(50%); /* Center adjust */
+    transform: translateY(0%);
+    font-size: 4.5rem;
+}
+.sec2-title-floating{
+    position: absolute; /* Relative to itself but within the container */
+    object-fit: cover;
+    color: #84c451;  /* Text color */
+    top: 0%;
+    left: 50%;
+    border-radius: 5px; /* Optional: Rounded corners */
+    text-align: center;
+    
+    transform: translateX(50%); /* Center adjust */
+    transform: translateY(0%);
+    font-size: 4.5rem;
+}
+
+
+
+
+/* Responsive design: mobile adjustments */
+@media screen and (max-width: 768px) {
+    :root {
+        font-size: 14px; /* Reduce the root font size */
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    header a {
+        margin: 0.5rem 0;
+    }
+
+    .content, .map, .results {
+        padding: 1rem;
+        font-size: 0.9rem;
+        margin: 1rem;
+    }
+
+    .content img {
+        max-width: 90%; /* Maximum width of images on small screens: 90% */
+        border-radius: 0.25rem;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
