@@ -57,7 +57,8 @@ The main folder for this project contains app.py (from where the website can be 
 
 ## Troubleshooting 
 
-If you encounter any issues or require any further clarification, please don't hesitate to contact s2750126@ed.ac.uk. 
+There might be a CORS issue about the deployment platform, which blocks the images display, may get fixed in the future.
+If you encounter any other issues or require any further clarification, please don't hesitate to contact s2750126@ed.ac.uk. 
 
 ## Authors
 
