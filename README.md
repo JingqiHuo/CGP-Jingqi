@@ -4,7 +4,7 @@ This project has been completed as a core component of the TIGIS course (Univers
 
 
 The website can be accessed [here](www.geos.ed.ac.uk/roseburnbiomass).  
-The website report can be accessed [here](link to our documentation). 
+The website report can be accessed [here](static/download/roseburn_path_data.pdf). 
 
 ## Description 
 
