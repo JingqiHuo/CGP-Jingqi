@@ -3,7 +3,7 @@
 This project has been completed as a core component of the TIGIS course (University of Edinburgh, 2024-25). Our team has produced a website that interactively presents the findings of our Capital Green Space project.
 
 
-The website can be accessed [here](www.geos.ed.ac.uk/dev/roseburnbiomass).  
+The website can be accessed [here](https://www.geos.ed.ac.uk/dev/roseburnbiomass/)).  
 The website report can be accessed [here](static/download/roseburn_path_report.pdf). 
 
 ## Description 
