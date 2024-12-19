@@ -34,14 +34,14 @@ The main folder for this project contains app.py (from where the website can be 
     git clone https://github.com/kfrancesling/Captial-Greenspaces-Project-Group-3.git
       ```
 2. Set environment variables: Navigate to the project directory and set environment variables (in terminal):
-    
+    Go to the [Mapbox Website](https://www.geos.ed.ac.uk/dev/roseburnbiomass/](https://www.mapbox.com/)
 - On Windows: 
      ```batch
-    set MAPBOX_API_KEY= pk.eyJ1Ijoia2ZyYW5jZXNsaW5nIiwiYSI6ImNtNHNnMDIzajAwZnEybHFtMXdwM3JlOXEifQ.8HO4zb1PGp2Pa7O7kWKbFw
+    set MAPBOX_API_KEY= <your tokens>
      ```
 - On Linux or Mac: 
      ```linux
-     export MAPBOX_API_KEY= pk.eyJ1Ijoia2ZyYW5jZXNsaW5nIiwiYSI6ImNtNHNnMDIzajAwZnEybHFtMXdwM3JlOXEifQ.8HO4zb1PGp2Pa7O7kWKbFw
+     export MAPBOX_API_KEY= <your tokens>
      ```
 3. Create the password file: Navigate to row 60 in fetchdata.py, replace the username with your own UUN, and create a new file in home directory called ‘databasepassword.txt’ with your password to Oracle database in it.
 
