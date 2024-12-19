@@ -3,8 +3,8 @@
 This project has been completed as a core component of the TIGIS course (University of Edinburgh, 2024-25). Our team has produced a website that interactively presents the findings of our Capital Green Space project.
 
 
-The website can be accessed [here](www.geos.ed.ac.uk/roseburnbiomass).  
-The website report can be accessed [here](static/download/roseburn_path_data.pdf). 
+The website can be accessed [here](www.geos.ed.ac.uk/dev/roseburnbiomass).  
+The website report can be accessed [here](static/download/roseburn_path_report.pdf). 
 
 ## Description 
 
@@ -38,11 +38,11 @@ The main folder for this project contains app.py (from where the website can be 
     Go to the [Mapbox Website](https://www.mapbox.com/)
 - On Windows: 
      ```batch
-    set MAPBOX_API_KEY= <your tokens>
+    set MAPBOX_API_KEY= <YOUR_TOKEN>
      ```
 - On Linux or Mac: 
      ```linux
-     export MAPBOX_API_KEY= <your tokens>
+     export MAPBOX_API_KEY= <YOUR_TOKEN>
      ```
 3. Create the password file: Navigate to row 60 in fetchdata.py, replace the username with your own UUN, and create a new file in home directory called ‘databasepassword.txt’ with your password to Oracle database in it.
 
