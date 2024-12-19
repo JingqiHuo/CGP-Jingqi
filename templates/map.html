@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Links to the Leaflet CSS for map styling -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <!-- Links to custom CSS for additional vector map styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/vectorstyles.css') }}" />
+    <!-- Links to the Leaflet JavaScript library for interactive maps -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        // Load and add the GeoJSON boundary layer
+        let boundaryLayer;
+        var boundary = '{{ url_for("static", filename="info/boundary.json") }}';
+        
+        fetch(boundary)
+            .then(response => response.json()) // Parse JSON response
+            .then(data => {
+                // Create a GeoJSON layer with styling and add to map
+                boundaryLayer = L.geoJSON(data, {
+                    style: function() {
+                        return {
+                            color: 'black', // Color of the shapefile
+                            fillOpacity: 0.5, // opacity of the shape file
+                            weight: 1 // weight of the line
+                        };
+                    }
+                }).addTo(map);
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error)); // Log any errors
+           
+            
+    </script>
+</head>
+<body>
+    <div id="map">
+            <!-- Control panel for selecting biomass ranges -->
+            <div id="controls">
+                <h2>Biomass Range (kg/m²)</h2>
+                <button id="range-all">All</button>
+                <button id="range-0-100">0-100</button>
+                <button id="range-100-500">100-500</button>
+                <button id="range-500-1000">500-1000</button>
+                <button id="range-1000-1500">1000-1500</button>
+            </div>
+            <!-- Tree cards/info placeholder -->
+        <div id="sidebar"></div>
+    </div>
+        <!-- Embeds the Mapbox API key for map functionality -->
+    <script> const mapboxApiKey = "{{ mapbox_key }}"; </script>
+        <!-- js for vector map using Jinga-->
+    <script src="{{ url_for('static', filename='js/vectormap.js') }}"></script>
+    <script>
+            window.displayTreeInfo = function(tree_id, dw_biomass, species) {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = 'block'; // Make sure sidebar is visible
+            sidebar.textContent = ''; // Clear previous content in the sidebar
+
+            const card = document.createElement('div');
+            card.className = 'tree-card'; // set style class
+
+            // Create and append the species header
+            const header = document.createElement('h3');
+            header.textContent = species;
+            card.appendChild(header);
+                
+            const imageContainer = document.createElement('div'); 
+            imageContainer.className = 'image-container';
+            const img = document.createElement('img');
+            fetch(`{{ url_for('static', filename='/tree_img/') }}${tree_id}.jpg`)
+                .then(response => {
+                    if (response.ok) {
+                        img.src = response.url;
+                    } else {
+                        img.alt = 'Image not available';
+                    }
+                })
+                .catch(() => img.alt = 'Image not available');
+            
+            img.alt = species;
+            img.onload = () => img.classList.add('loaded');
+            imageContainer.appendChild(img);
+            card.appendChild(imageContainer);
+            
+            // Create and append the biomass paragraph
+            const biomassPara = document.createElement('p');
+            biomassPara.textContent = `Biomass: ${dw_biomass}`;
+            card.appendChild(biomassPara);
+            
+            // Create and append the facts paragraph
+            const factsPara = document.createElement('p');
+            factsPara.textContent = treeFacts[species] || 'No fact available.';
+            card.appendChild(factsPara);
+            
+            sidebar.appendChild(card); // Append the complete card to the sidebar
+        }
+    </script>
+</body>
+</html>
