@@ -33,8 +33,9 @@ The main folder for this project contains app.py (from where the website can be 
       ```linux
     git clone https://github.com/kfrancesling/Captial-Greenspaces-Project-Group-3.git
       ```
-2. Set environment variables: Navigate to the project directory and set environment variables (in terminal):
-   
+2. Set environment variables:
+  
+  Navigate to the project directory and set environment variables (in terminal): 
     Go to the [Mapbox Website](https://www.mapbox.com/)
 - On Windows: 
      ```batch
